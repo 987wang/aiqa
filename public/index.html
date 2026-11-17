@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 答疑助手</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>AI 答疑助手</h1>
+    <p class="sub">提问 → 检索 → 回答 → 存档</p>
+
+    <section class="ask-box">
+      <input id="question" data-testid="ask-input" type="text" placeholder="输入你的问题，例如：什么是 Spec 驱动开发？" />
+      <button id="askBtn" data-testid="ask-button" type="button">提交提问</button>
+    </section>
+
+    <section id="result" data-testid="answer-panel" class="panel hidden">
+      <h2>回答</h2>
+      <p id="answer" data-testid="answer-text"></p>
+      <p id="meta" data-testid="answer-meta" class="meta"></p>
+    </section>
+
+    <section class="panel">
+      <h2>历史提问</h2>
+      <ul id="history" data-testid="history-list" class="history"></ul>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

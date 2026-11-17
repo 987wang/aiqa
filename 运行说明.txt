@@ -1,0 +1,39 @@
+AI 答疑助手（aiqa）—— 实验7-1 配套工程
+
+一、环境要求
+Node.js 18 及以上（npm 随 Node 一起安装）
+
+二、安装依赖
+在本目录执行：
+    npm install
+说明：本工程运行时零第三方依赖，上面的依赖只用于测试
+（vitest、supertest、@playwright/test）。
+
+三、启动服务
+    npm start
+浏览器访问 http://localhost:3000
+
+四、运行测试
+单元测试：      npm test
+集成测试：      npm run test:api
+端到端测试：    npx playwright install chromium   （首次需下载浏览器）
+                npm run test:e2e
+
+五、目录说明
+src/server.js               HTTP 服务入口（createServer 工厂 + 直接运行才监听 3000）
+src/routes/ask.js           POST /api/ask、GET /api/history
+src/record/qaRecord.js      问答记录的增查与 JSON 持久化（add/list/readAll/writeAll）
+src/static.js               静态资源服务
+public/index.html           提问页面（含 data-testid 测试定位属性）
+public/app.js               前端交互
+tests/qaRecord.test.js      单元测试 17 条
+tests/ask.integration.test.js 集成测试 4 条
+tests/ask.e2e.spec.js       端到端测试 1 条
+data/qa-records.json        问答记录存档
+playwright.config.js        Playwright 配置
+vitest.config.js            Vitest 配置
+
+六、常见问题
+1) 端口被占用（EADDRINUSE）：关闭占用 3000 端口的进程，或 set PORT=3001 后 npm start。
+2) data/qa-records.json 内容必须是合法 JSON（至少是 []），不要用记事本另存为带 BOM 的编码。
+3) 端到端测试会弹出 Chromium 窗口，属正常现象（headless: false）。

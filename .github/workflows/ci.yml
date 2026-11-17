@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Integration tests
+        run: npm run test:api
+      - name: Coverage gate (80%)
+        run: npm run test:coverage
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+      - name: E2E tests
+        run: npm run test:e2e
