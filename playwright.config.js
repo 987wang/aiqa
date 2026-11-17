@@ -8,7 +8,8 @@ module.exports = defineConfig({
   expect: { timeout: 10000 },
   use: {
     baseURL: 'http://localhost:3000',
-    headless: false,
+    // CI 的 Linux runner 没有图形界面，必须用无头模式；本地仍保留有头便于观察
+    headless: !!process.env.CI,
     // 单个操作最多等 30 秒，超时报错更直观
     actionTimeout: 30000,
     // 每步操作放慢 0.5 秒，便于观察/截图
